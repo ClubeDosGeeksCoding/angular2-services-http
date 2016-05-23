@@ -1,3 +1,63 @@
-<h2>{{title}}</h2>
-<input type="text" [(ngModel)]="name"><br>
-<h3>Olá {{name}}</h3>
+<div class="container">
+	<h2>Exemplo</h2>
+	<hr>
+	<div class="row">
+		<div class="col-md-6">
+			<button class="btn btn-primary" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i> Novo</button>	
+		</div>
+		<div class="col-md-6">
+			<input type="text" class="form-control" placeholder="Pesquisar">
+		</div>
+	</div>
+	<hr>
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Name</th>
+						<th>E-mail</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="#pessoa of pessoas">
+						<td>{{person.id}}</td>
+						<td>{{person.nome}}</td>
+						<td>{{person.email}}</td>
+						<td>
+							<button (click)="edit(person)" class="btn btn-xs btn-info">Edit</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">Cadastro</h4>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<label>Nome:</label>
+					<input type="text" class="form-control" [(ngModel)]="pessoa.nome">
+				</div>
+				<div class="form-group">
+					<label>E-mail:</label>
+					<input type="email" class="form-control" [(ngModel)]="pessoa.email" >
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+				<button type="button" class="btn btn-primary" (click)="salvar()">Salvar</button>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,11 +1,33 @@
-import { Component } from 'angular2/core';
+import { Component, Input} from 'angular2/core';
+import { PessoaService } from './pessoa.service';
+import { HTTP_PROVIDERS }    from 'angular2/http';
 
 @Component({
-  selector:    'aplicativo',
-  templateUrl: 'app/view.html'
+	selector:    'my-app',
+	templateUrl: 'app/view.html',
+	providers: [
+	PessoaService,
+	HTTP_PROVIDERS
+	]
 })
 
-export class AppComponent {
-	title:string = "Seu primeiro aplicativo Angular 2";
-	name:string = "Jayr";
+export class AppComponent implements OnInit {
+	id: number;
+	nome, email: string;
+	pessoas: Array[];
+	pessoa: AppComponent = {};
+	constructor(private _service: PessoaService){
+		this.getPessoas();
+	}
+
+	getPessoas(){
+		this._service.getPessoas()
+      		.then(pessoas => this.pessoas = pessoas);
+	}
+
+	salvar(){
+		this._service.salvar(this.pessoa).then(pessoa=>{
+			this.getPessoas();
+		})
+	}
 }
