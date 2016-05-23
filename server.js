@@ -1,8 +1,10 @@
 var express = require('express');
+var bodyParser = require('body-parser');
 var app = express();
 var router = express.Router();
 var path = require('path');
 var sqlite = require('sqlite-sync');
+
 
 // Conectando ao banco de dados
 sqlite.connect('./model/database.db');
@@ -11,6 +13,8 @@ sqlite.run("CREATE TABLE pessoas (id INTEGER PRIMARY KEY AUTOINCREMENT, nome CHA
 
 // child process
 var exec = require('child_process').exec
+
+app.use(bodyParser.json());
 
 app.use('/app', express.static(path.join(__dirname,'/app')));
 app.use('/bootstrap', express.static(path.join(__dirname,'/bootstrap')));
@@ -26,8 +30,9 @@ app.get('/api/pessoas', function(req,res){
 });
 
 app.post('/api/pessoas', function(req, res){
-	console.log(req.body);
-	res.send(req.body);
+	sqlite.insert('pessoas', req.body, function(id){
+		res.send({'id':id});	
+	});
 });
 
 

@@ -23,6 +23,7 @@
   "homepage": "https://github.com/ClubeDosGeeksCoding/angular2-services-http#readme",
   "dependencies":{
     "express":"latest",
-    "sqlite-sync":"latest"
+    "sqlite-sync":"latest",
+    "body-parser":"latest"
   }
 }

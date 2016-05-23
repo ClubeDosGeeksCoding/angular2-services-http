@@ -1,6 +1,6 @@
 import {Injectable}     from 'angular2/core';
 import {Observable}     from 'rxjs/Observable';
-import {Http, Headers } from 'angular2/http';
+import {Http, Headers,RequestOptions } from 'angular2/http';
 
 @Injectable()
 export class PessoaService {
@@ -17,12 +17,11 @@ export class PessoaService {
 	 }
 
 	 salvar(pessoa: Array){
-	 	console.log(JSON.stringify(pessoa))
+	 	let body = JSON.stringify(pessoa);
 	 	let headers = new Headers({'Content-Type': 'application/json'});
-	 	console.log(headers)
+	 	let options = new RequestOptions({ headers: headers });
 
-    	return this.http
-               .post(this.apiUrl, JSON.stringify(pessoa), {headers: headers})
+    	return this.http.post(this.apiUrl, body, options)
                .toPromise()
                .then(res => res.json().data)
                .catch(this.handleError);
