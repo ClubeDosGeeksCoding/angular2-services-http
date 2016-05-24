@@ -1,16 +1,14 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-var app = express();
-var router = express.Router();
-var path = require('path');
-var sqlite = require('sqlite-sync');
+var express = require('express'),
+	app = express(),
+	router = express.Router(),
+	bodyParser = require('body-parser'),
+	path = require('path'),
+	sqlite = require('sqlite-sync');
 
-// Conectando ao banco de dados
 sqlite.connect('./model/database.db');
 
 sqlite.run("CREATE TABLE pessoas (id INTEGER PRIMARY KEY AUTOINCREMENT, nome CHAR(100), email CHAR(100));");
 
-// child process
 var exec = require('child_process').exec
 
 app.use(bodyParser.json());

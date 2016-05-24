@@ -7,16 +7,16 @@ import { HTTP_PROVIDERS }    from 'angular2/http';
 	selector:    'my-app',
 	templateUrl: 'app/view.html',
 	providers: [
-	PessoaService,
-	HTTP_PROVIDERS
+		PessoaService,
+		HTTP_PROVIDERS
 	]
 })
 
 export class AppComponent {
-	id: number;
-	nome, email: string;
+	private id: number;
+	private nome, email: string;
 	private pessoas: Array[];
-	pessoa: AppComponent = {};
+	private pessoa: AppComponent = {};
 	constructor(private _service: PessoaService){
 		this.getPessoas();
 	}
