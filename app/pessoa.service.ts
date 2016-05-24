@@ -12,11 +12,11 @@ export class PessoaService {
 	 getPessoas(){
 	 	return this.http.get(this.apiUrl)
 	 	.toPromise()
-	 	.then(response => response.json().data)
+	 	.then(response => response.json())
 	 	.catch(this.handleError);
 	 }
 
-	 salvar(pessoa: Array){
+	 novo(pessoa: Array){
 	 	let body = JSON.stringify(pessoa);
 	 	let headers = new Headers({'Content-Type': 'application/json'});
 	 	let options = new RequestOptions({ headers: headers });
@@ -25,5 +25,28 @@ export class PessoaService {
                .toPromise()
                .then(res => res.json().data)
                .catch(this.handleError);
+	 }
+
+	 editar(pessoa: Array){
+		 let id = pessoa.id;
+		 delete pessoa.id;
+		 let body = JSON.stringify(pessoa);
+		 let headers = new Headers({ 'Content-Type': 'application/json' });
+		 let options = new RequestOptions({ headers: headers });
+
+		 let url = this.apiUrl + '/' + id;
+
+		 return this.http.put(url, body, options)
+			 .toPromise()
+			 .then(res => res.json().data)
+			 .catch(this.handleError);
+	 }
+
+	 excluir(id: number){
+		 let url = this.apiUrl + '/' + id;
+		 return this.http.delete(url)
+			 .toPromise()
+			 .then(res => res.json().data)
+			 .catch(this.handleError);
 	 }
 }

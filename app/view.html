@@ -5,9 +5,6 @@
 		<div class="col-md-6">
 			<button class="btn btn-primary" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i> Novo</button>	
 		</div>
-		<div class="col-md-6">
-			<input type="text" class="form-control" placeholder="Pesquisar">
-		</div>
 	</div>
 	<hr>
 	<div class="row">
@@ -22,12 +19,13 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr *ngFor="#pessoa of pessoas">
-						<td>{{person.id}}</td>
-						<td>{{person.nome}}</td>
-						<td>{{person.email}}</td>
+					<tr *ngFor="let pessoa of pessoas">
+						<td>{{pessoa.id}}</td>
+						<td>{{pessoa.nome}}</td>
+						<td>{{pessoa.email}}</td>
 						<td>
-							<button (click)="edit(person)" class="btn btn-xs btn-info">Edit</button>
+							<button (click)="editar(pessoa)" class="btn btn-xs btn-info">Editar</button>
+							<button (click)="excluir(pessoa)" class="btn btn-xs btn-danger">Excluir</button>
 						</td>
 					</tr>
 				</tbody>
@@ -55,7 +53,7 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+				<button type="button" class="btn btn-default" (click)="cancelar()" >Cancelar</button>
 				<button type="button" class="btn btn-primary" (click)="salvar()">Salvar</button>
 			</div>
 		</div>

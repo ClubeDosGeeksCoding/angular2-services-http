@@ -5,7 +5,6 @@ var router = express.Router();
 var path = require('path');
 var sqlite = require('sqlite-sync');
 
-
 // Conectando ao banco de dados
 sqlite.connect('./model/database.db');
 
@@ -24,7 +23,6 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'index.html'))
 });
 
-
 app.get('/api/pessoas', function(req,res){
 	res.send(sqlite.run("SELECT * FROM pessoas"));
 });
@@ -35,6 +33,20 @@ app.post('/api/pessoas', function(req, res){
 	});
 });
 
+app.put("/api/pessoas/:id", function(req, res){
+	var id = req.params.id;
+	var body = req.body;
+	sqlite.update('pessoas', body, {id:id}, function(result){
+		res.send({result:result});
+	});
+});
+
+app.delete('/api/pessoas/:id', function(req, res){
+	var id = req.params.id;
+	sqlite.delete('pessoas',{id: id}, function(result){
+		res.send({result:result});
+	})
+});
 
 app.listen(3000, function(){
 	exec('start http://localhost:3000');
