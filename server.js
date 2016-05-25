@@ -35,14 +35,14 @@ app.put("/api/pessoas/:id", function(req, res){
 	var id = req.params.id;
 	var body = req.body;
 	sqlite.update('pessoas', body, {id:id}, function(result){
-		res.send({result:result});
+		res.send({result : result});
 	});
 });
 
 app.delete('/api/pessoas/:id', function(req, res){
 	var id = req.params.id;
 	sqlite.delete('pessoas',{id: id}, function(result){
-		res.send({result:result});
+		res.send({result : result});
 	})
 });
 
