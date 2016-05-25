@@ -9,7 +9,7 @@ sqlite.connect('./model/database.db');
 
 sqlite.run("CREATE TABLE pessoas (id INTEGER PRIMARY KEY AUTOINCREMENT, nome CHAR(100), email CHAR(100));");
 
-var exec = require('child_process').exec
+var exec = require('child_process').exec;
 
 app.use(bodyParser.json());
 
@@ -18,7 +18,7 @@ app.use('/bootstrap', express.static(path.join(__dirname,'/bootstrap')));
 app.use('/angular2', express.static(path.join(__dirname,'/angular2')));
 
 app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname, 'index.html'))
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 app.get('/api/pessoas', function(req,res){
@@ -43,7 +43,7 @@ app.delete('/api/pessoas/:id', function(req, res){
 	var id = req.params.id;
 	sqlite.delete('pessoas',{id: id}, function(result){
 		res.send({result : result});
-	})
+	});
 });
 
 app.listen(3000, function(){

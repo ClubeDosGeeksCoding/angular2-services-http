@@ -4,7 +4,6 @@ import { HTTP_PROVIDERS }    from 'angular2/http';
 // Services
 import { PessoaService } from './pessoa.service';
 
-
 @Component({
 	selector:    'my-app',
 	templateUrl: 'app/view.html',
@@ -18,7 +17,6 @@ import { PessoaService } from './pessoa.service';
 * Classe AppComponent
 */
 export class AppComponent {
-
 	/**
 	* Atributos
 	*/
